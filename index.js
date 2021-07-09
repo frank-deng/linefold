@@ -155,10 +155,30 @@ export default function(text, maxWidth, textLengthMeasure, extraRules=[]){
     //找出超长的分组进行拆分
     //一旦找到超长的组，拆分过程将比较耗时，因此需要避免文本中出现过长的单词
     for(let i=groups.length-1; i>=0; i--){
-        let group=groups[i];
+        let group=groups[i].trim();
         if(measureFunc(group) <= maxWidth){
             continue;
         }
         groups.splice(i,1,...split(group,maxWidth,measureFunc));
     }
+
+    //将分组整合成行
+    let lines=[],currentLine='';
+    for(let group of groups){
+        if('\n'==group){
+            lines.push('');
+            currentLine='';
+            continue;
+        }
+        if(measureFunc(currentLine+group.replace(/\s+$/g,"")) <= maxWidth){
+            currentLine+=group;
+        }else{
+            lines.push(currentLine.replace(/\s+$/g,""));
+            currentLine='';
+        }
+    }
+    if(currentLine.length){
+        lines.push(currentLine.replace(/\s+$/g,""));
+    }
+    return lines;
 }
