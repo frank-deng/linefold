@@ -2,13 +2,21 @@ const Linefold=require('./linefold.test');
 const assert = require('assert');
 
 describe('Grouping test',function(){
-    it('Grouping test 1',function(){
+    it('Grouping test',function(){
         assert.deepStrictEqual(Linefold.group('Mocha Test'),[
             'Mocha ',
             'Test'
         ]);
         assert.deepStrictEqual(Linefold.group('Mocha \tTest\t'),[
             'Mocha \t',
+            'Test\t'
+        ]);
+        assert.deepStrictEqual(Linefold.group('  Mocha \tTest\t'),[
+            '  Mocha \t',
+            'Test\t'
+        ]);
+        assert.deepStrictEqual(Linefold.group('  \tMocha \tTest\t'),[
+            '  \tMocha \t',
             'Test\t'
         ]);
     });

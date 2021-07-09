@@ -98,11 +98,14 @@ export function group(str0, matcherList=[]){
         //使用给定的正则进行匹配，如果匹配且匹配的位置在剩余字符串头部，则单独成为一组或整体添加到上一组末尾
         let charProc=matchedStr(str,[
             ...matcherList,
+            /^\s+/,
             /^[A-Za-z0-9\u0430-\u04ff]+\s*/i
         ]);
         str=str.slice(charProc.length);
 
-        if('\n'!=charProc && (HEAD_CHAR[prevCharProc] || TAIL_CHAR[charProc] || /^\s+$/.test(charProc))){
+        if('\n'!=charProc && result.length
+            && (HEAD_CHAR[prevCharProc] || TAIL_CHAR[charProc]
+                || /^\s+$/.test(prevCharProc) || /^\s+$/.test(charProc))){
             //将当前字符加入到最后一组中
             result[result.length-1]+=charProc;
         }else{
@@ -155,7 +158,7 @@ export default function(text, maxWidth, textLengthMeasure, extraRules=[]){
     //找出超长的分组进行拆分
     //一旦找到超长的组，拆分过程将比较耗时，因此需要避免文本中出现过长的单词
     for(let i=groups.length-1; i>=0; i--){
-        let group=groups[i].trim();
+        let group=groups[i];
         if(measureFunc(group) <= maxWidth){
             continue;
         }
