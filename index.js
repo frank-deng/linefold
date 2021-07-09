@@ -119,6 +119,10 @@ export function split(str,maxWidth,measureFunc){
         let substr=str.slice(start,end);
         if(measureFunc(substr)<=maxWidth){
             end++;
+        }else if(substr.length<=1){
+            result.push(substr[0]);
+            start++;
+            end++;
         }else{
             result.push(str.slice(start,end-1));
             start=end-1;

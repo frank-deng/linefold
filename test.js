@@ -44,4 +44,22 @@ describe('Overwidth test',function(){
             'IJ'
         ]);
     });
+    it('Split text with space narrower than one character',function(){
+        assert.deepStrictEqual(Linefold.split('ABC',5,(str)=>(str.length*8)),[
+            'A','B','C'
+        ]);
+        assert.deepStrictEqual(Linefold.split('ABCDEF',10,(str)=>{
+            let len=0;
+            for(let ch of str){
+                if('B'==ch){
+                    len+=12;
+                }else{
+                    len+=3;
+                }
+            }
+            return len;
+        }),[
+            'A','B','CDE','F'
+        ]);
+    });
 });
