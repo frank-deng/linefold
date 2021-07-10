@@ -98,14 +98,14 @@ export function group(str0, matcherList=[]){
         //使用给定的正则进行匹配，如果匹配且匹配的位置在剩余字符串头部，则单独成为一组或整体添加到上一组末尾
         let charProc=matchedStr(str,[
             ...matcherList,
-            /^\s+/,
-            /^[A-Za-z0-9\u0430-\u04ff]+\s*/i
+            /^[^\S\r\n]+/,
+            /^[A-Za-z0-9\u0430-\u04ff]+[^\S\r\n]*/i
         ]);
         str=str.slice(charProc.length);
 
         if('\n'!=charProc && result.length
             && (HEAD_CHAR[prevCharProc] || TAIL_CHAR[charProc]
-                || /^\s+$/.test(prevCharProc) || /^\s+$/.test(charProc))){
+                || /^[^\S\r\n]+$/.test(prevCharProc) || /^[^\S\r\n]+$/.test(charProc))){
             //将当前字符加入到最后一组中
             result[result.length-1]+=charProc;
         }else{
@@ -169,7 +169,7 @@ export default function(text, maxWidth, textLengthMeasure, extraRules=[]){
     let lines=[],currentLine='';
     for(let group of groups){
         if('\n'==group){
-            lines.push('');
+            lines.push(currentLine.replace(/\s+$/g,""));
             currentLine='';
             continue;
         }
@@ -177,7 +177,7 @@ export default function(text, maxWidth, textLengthMeasure, extraRules=[]){
             currentLine+=group;
         }else{
             lines.push(currentLine.replace(/\s+$/g,""));
-            currentLine='';
+            currentLine=group;
         }
     }
     if(currentLine.length){

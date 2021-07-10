@@ -19,6 +19,9 @@ describe('Grouping test',function(){
             '  \tMocha \t',
             'Test\t'
         ]);
+        assert.deepStrictEqual(Linefold.group('The quick brown fox jumps over a lazy dog'),[
+            'The ','quick ','brown ','fox ','jumps ','over ','a ','lazy ','dog'
+        ]);
     });
     it('Chinese test',function(){
         assert.deepStrictEqual(Linefold.group('HTML5的canvas元素使用JavaScript在网页上绘制图像，画布是一个矩形区域。'),[
@@ -68,6 +71,38 @@ describe('Overwidth test',function(){
             return len;
         }),[
             'A','B','CDE','F'
+        ]);
+        assert.deepStrictEqual(Linefold.split('HTML5的canvas元素',16,(str)=>{
+            let len=0;
+            for(let ch of str){
+                len+=(/[\u4E00-\u9FFF]/.test(ch) ? 16 : 8);
+            }
+            return len;
+        }),['HT','ML','5','的','ca','nv','as','元','素']);
+    });
+});
+describe('Line folding integration test',function(){
+    it('One-line text',function(){
+        let text='The quick brown fox jumps over a lazy dog';
+        assert.deepStrictEqual(Linefold.default(text,8*16,(str)=>(str.length*8)),[
+            "The quick brown",
+            "fox jumps over a",
+            "lazy dog"
+        ]);
+        assert.deepStrictEqual(Linefold.default(text,8*15-4,(str)=>(str.length*8)),[
+            "The quick",
+            "brown fox",
+            "jumps over a",
+            "lazy dog"
+        ]);
+    });
+    it('One-line text',function(){
+        let text='The quick brown fox\njumps over a lazy dog';
+        assert.deepStrictEqual(Linefold.default(text,8*16,(str)=>(str.length*8)),[
+            "The quick brown",
+            "fox",
+            "jumps over a",
+            "lazy dog"
         ]);
     });
 });
