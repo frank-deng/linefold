@@ -5,8 +5,15 @@ module.exports = {
   output: {
     path: path.resolve(__dirname),
     filename: 'linefold.js',
-    library: 'linefold',
-    libraryTarget: 'umd'
+    library:{
+      name:'linefold',
+      type:'umd'
+    }
+  },
+  devServer: {
+    contentBase: path.join(__dirname, 'test'),
+    compress: true,
+    port: 9000,
   },
   module: {
     rules: [
