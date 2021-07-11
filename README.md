@@ -7,7 +7,7 @@ linefold
 
 Convert given text into folded lines with maximum width and given font / given text length measuring function before rendering, so as to render paragraphs onto platforms without line-folding support, e.g. HTML5 Canvas.
 
-This tool only supports languages like English, French, German, Russian, Chinese, Japanese, Korean, etc. Scripts written from right to left (e.g. Arabic, Hebrew) and complex scripts (e.g. Hindi, Thai) not supported.
+This tool only supports languages like English, French, German, Russian, Chinese, Japanese, Korean, etc. Text with complex scripts (e.g. Arabic, Hebrew, Hindi, Thai) not supported.
 
 [Click here to open demo page](https://frank-deng.github.io/linefold/)
 
@@ -62,7 +62,7 @@ linefold
 
 根据给定的文本、最大宽度、字体/文本长度测量函数，对一段文本进行换行操作。用于将文本渲染到一些不支持自动换行的环境上，比如HTML5 Canvas。
 
-本工具仅支持英语、法语、德语、俄语、中日韩文字等文字。不支持从右向左书写的文字（如希伯来语、阿拉伯语）和复杂文字（如印地语、泰语）。
+本工具仅支持英语、法语、德语、俄语、中日韩文字等文字。不支持含有复杂文字（如希伯来语、阿拉伯语、印地语、泰语）的文本。
 
 [单击此处打开演示页面](https://frank-deng.github.io/linefold/)
 
