@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "description": "Folding one line text into multiple lines under HTML5 Canvas.",
   "main": "linefold.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/frank-deng/linefold"
+  },
   "scripts": {
     "build": "webpack-cli",
-    "serve": "webpack-cli serve",
     "test": "webpack-cli -c webpack.config-test.js && mocha"
   },
   "author": "Frank Deng",

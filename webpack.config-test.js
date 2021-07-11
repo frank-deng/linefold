@@ -1,5 +1,6 @@
-var path = require('path');
-var nodeExternals = require('webpack-node-externals');
+const path = require('path');
+const nodeExternals = require('webpack-node-externals');
+const RewirePlugin = require('rewire-webpack');
 module.exports = {
   mode: 'development',
   entry: './index.js',
@@ -10,5 +11,8 @@ module.exports = {
     libraryTarget: 'umd'
   },
   target: 'node',
-  externals: [nodeExternals()]
+  externals: [nodeExternals()],
+  plugins:[
+    RewirePlugin
+  ]
 };

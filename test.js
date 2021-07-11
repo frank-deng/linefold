@@ -1,30 +1,31 @@
-const Linefold=require('./linefold.test');
 const assert = require('assert');
+const Linefold=require('./linefold.test');
+const {group,split} = Linefold;
 
 describe('Grouping test',function(){
     it('Grouping test',function(){
-        assert.deepStrictEqual(Linefold.group('Mocha Test'),[
+        assert.deepStrictEqual(group('Mocha Test'),[
             'Mocha ',
             'Test'
         ]);
-        assert.deepStrictEqual(Linefold.group('Mocha \tTest\t'),[
+        assert.deepStrictEqual(group('Mocha \tTest\t'),[
             'Mocha \t',
             'Test\t'
         ]);
-        assert.deepStrictEqual(Linefold.group('  Mocha \tTest\t'),[
+        assert.deepStrictEqual(group('  Mocha \tTest\t'),[
             '  Mocha \t',
             'Test\t'
         ]);
-        assert.deepStrictEqual(Linefold.group('  \tMocha \tTest\t'),[
+        assert.deepStrictEqual(group('  \tMocha \tTest\t'),[
             '  \tMocha \t',
             'Test\t'
         ]);
-        assert.deepStrictEqual(Linefold.group('The quick brown fox jumps over a lazy dog'),[
+        assert.deepStrictEqual(group('The quick brown fox jumps over a lazy dog'),[
             'The ','quick ','brown ','fox ','jumps ','over ','a ','lazy ','dog'
         ]);
     });
     it('Chinese test',function(){
-        assert.deepStrictEqual(Linefold.group('HTML5的canvas元素使用JavaScript在网页上绘制图像，画布是一个矩形区域。'),[
+        assert.deepStrictEqual(group('HTML5的canvas元素使用JavaScript在网页上绘制图像，画布是一个矩形区域。'),[
             `HTML5`,
             `的`,
             `canvas`,
@@ -35,31 +36,31 @@ describe('Grouping test',function(){
 });
 describe('Overwidth test',function(){
     it('Split text',function(){
-        assert.deepStrictEqual(Linefold.split('ABCDEFGH',8*4,(str)=>(str.length*8)),[
+        assert.deepStrictEqual(split('ABCDEFGH',8*4,(str)=>(str.length*8)),[
             'ABCD',
             'EFGH'
         ]);
-        assert.deepStrictEqual(Linefold.split('ABCDEFGHI',8*4,(str)=>(str.length*8)),[
+        assert.deepStrictEqual(split('ABCDEFGHI',8*4,(str)=>(str.length*8)),[
             'ABCD',
             'EFGH',
             'I'
         ]);
-        assert.deepStrictEqual(Linefold.split('ABCDEFGHI',36,(str)=>(str.length*8)),[
+        assert.deepStrictEqual(split('ABCDEFGHI',36,(str)=>(str.length*8)),[
             'ABCD',
             'EFGH',
             'I'
         ]);
-        assert.deepStrictEqual(Linefold.split('ABCDEFGHIJ',36,(str)=>(str.length*8)),[
+        assert.deepStrictEqual(split('ABCDEFGHIJ',36,(str)=>(str.length*8)),[
             'ABCD',
             'EFGH',
             'IJ'
         ]);
     });
     it('Split text with space narrower than one character',function(){
-        assert.deepStrictEqual(Linefold.split('ABC',5,(str)=>(str.length*8)),[
+        assert.deepStrictEqual(split('ABC',5,(str)=>(str.length*8)),[
             'A','B','C'
         ]);
-        assert.deepStrictEqual(Linefold.split('ABCDEF',10,(str)=>{
+        assert.deepStrictEqual(split('ABCDEF',10,(str)=>{
             let len=0;
             for(let ch of str){
                 if('B'==ch){
@@ -72,7 +73,7 @@ describe('Overwidth test',function(){
         }),[
             'A','B','CDE','F'
         ]);
-        assert.deepStrictEqual(Linefold.split('HTML5的canvas元素',16,(str)=>{
+        assert.deepStrictEqual(split('HTML5的canvas元素',16,(str)=>{
             let len=0;
             for(let ch of str){
                 len+=(/[\u4E00-\u9FFF]/.test(ch) ? 16 : 8);
