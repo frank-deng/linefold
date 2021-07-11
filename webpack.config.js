@@ -1,9 +1,9 @@
 var path = require('path');
 module.exports = {
   mode: 'production',
-  entry: './index.js',
+  entry: './src/linefold.js',
   output: {
-    path: path.resolve(__dirname),
+    path: path.resolve(__dirname,'dist'),
     filename: 'linefold.js',
     library:'linefold',
     libraryExport:'default',

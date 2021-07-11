@@ -2,7 +2,7 @@
   "name": "linefold",
   "version": "1.0.0",
   "description": "Folding one line text into multiple lines under HTML5 Canvas.",
-  "main": "linefold.js",
+  "main": "dist/linefold.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/frank-deng/linefold"
