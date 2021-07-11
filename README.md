@@ -5,7 +5,7 @@ linefold
 
 [English](#english) | [中文](#chinese)
 
-Convert given text into folded lines with given font and maximum width before rendering, so as to render paragraphs onto platforms without line-folding support, e.g. HTML5 Canvas.
+Convert given text into folded lines with maximum width and given font / given text length measuring function before rendering, so as to render paragraphs onto platforms without line-folding support, e.g. HTML5 Canvas.
 
 [Click here to open demo page](https://frank-deng.github.io/linefold/)
 
@@ -39,14 +39,14 @@ Example
 Default text length measuring function based on HTML Canvas, with text length in pixel:
 
 	var text='Convert given text into folded lines with given font and maximum width before rendering, so as to render paragraphs onto platforms without line-folding support, e.g. HTML5 Canvas.';
-	var lines=linefold('',320,'16px Times New Roman');
+	var lines=linefold(text,320,'16px Times New Roman');
 	/*
 	Folding result:
 	[
-		'Convert given text into folded lines with given',
-		'font and maximum width before rendering, so as',
-		'to render paragraphs onto platforms without line-',
-		'folding support, e.g. HTML5 Canvas.'
+		"Convert given text into folded lines with given",
+		"font and maximum width before rendering, so as",
+		"to render paragraphs onto platforms without line-",
+		"folding support, e.g. HTML5 Canvas."
 	]
 	*/
 
@@ -58,7 +58,7 @@ linefold
 
 [English](#english) | [中文](#chinese)
 
-根据给定的文本、最大宽度、字体等条件，对一段文本进行换行操作。用于将文本渲染到一些不支持自动换行的环境上，比如HTML5 Canvas。
+根据给定的文本、最大宽度、字体/文本长度测量函数，对一段文本进行换行操作。用于将文本渲染到一些不支持自动换行的环境上，比如HTML5 Canvas。
 
 [单击此处打开演示页面](https://frank-deng.github.io/linefold/)
 
@@ -92,14 +92,13 @@ Script Tag
 浏览器中使用默认的基于HTML Canvas的文本长度测量方式，单位为像素：
 
 	var text='根据给定的文本、最大宽度、字体等条件，对一段文本进行换行操作。然后渲染到一些不支持自动换行的环境上，比如HTML5 Canvas。';
-	var lines=linefold('',320,'16px 宋体');
+	var lines=linefold(text,320,'16px 宋体');
 	/*
 	换行结果：
 	[
-		'根据给定的文本、最大宽度、字体等条件，对',
-		'一段文本进行换行操作。然后渲染到一些不支',
-		'持自动换行的环境上，比如HTML5',
-		'Canvas。'
+		"根据给定的文本、最大宽度、字体等条件，对",
+		"一段文本进行换行操作。然后渲染到一些不支",
+		"持自动换行的环境上，比如HTML5 Canvas。"
 	]
 	*/
 
