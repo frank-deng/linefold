@@ -13,11 +13,13 @@ describe('Grouping test',function(){
             'Test\t'
         ]);
         assert.deepStrictEqual(group('  Mocha \tTest\t'),[
-            '  Mocha \t',
+            '  ',
+            'Mocha \t',
             'Test\t'
         ]);
         assert.deepStrictEqual(group('  \tMocha \tTest\t'),[
-            '  \tMocha \t',
+            '  \t',
+            'Mocha \t',
             'Test\t'
         ]);
         assert.deepStrictEqual(group('The quick brown fox jumps over a lazy dog'),[
@@ -31,6 +33,9 @@ describe('Grouping test',function(){
             `canvas`,
             `元`,`素`,`使`,`用`,`JavaScript`,`在`,`网`,`页`,`上`,
             `绘`,`制`,`图`,`像，`,`画`,`布`,`是`,`一`,`个`,`矩`,`形`,`区`,`域。`
+        ]);
+        assert.deepStrictEqual(group('使用 canvas 绘制路径'),[
+            '使','用 ','canvas ','绘','制','路','径'
         ]);
     });
 });

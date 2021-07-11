@@ -105,7 +105,7 @@ export function group(str0, matcherList=[]){
 
         if('\n'!=charProc && result.length
             && (HEAD_CHAR[prevCharProc] || TAIL_CHAR[charProc]
-                || /^[^\S\r\n]+$/.test(prevCharProc) || /^[^\S\r\n]+$/.test(charProc))){
+                || /^[^\S\r\n]+$/.test(charProc))){
             //将当前字符加入到最后一组中
             result[result.length-1]+=charProc;
         }else{

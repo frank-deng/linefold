@@ -14,7 +14,7 @@
             <div>字体</div>
             <input name='font' value='16px normal 宋体'/>
             <div>正文</div>
-            <textarea name='textInput'></textarea>
+            <textarea name='textInput' rows='10' cols='40'></textarea>
         </form>
         <canvas class='testCanvas' id='testCanvas'></canvas>
     </body>
@@ -27,13 +27,12 @@ function refreshCanvas(){
         font=document.querySelector('[name=font]').value,
         text=document.querySelector('[name=textInput]').value;
     var lines=linefold(text,width,font);
-    console.log(lines);
     canvas.width=width;
     canvas.height=lineHeight*lines.length;
     ctx.font=font;
     ctx.fillStyle='#000000';
-    ctx.textBaseline='top';
-    var y=0;
+    ctx.textBaseline='middle';
+    var y=Math.round(lineHeight/2);
     for(let line of lines){
         ctx.fillText(line,0,y);
         y+=lineHeight;
@@ -45,6 +44,9 @@ function refreshCanvas(){
 .testCanvas{
     display: block;
     border:1px solid #000000;
+}
+[name=textInput]{
+    resize:none;
 }
     </style>
 </html>
