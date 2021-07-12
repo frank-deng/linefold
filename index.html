@@ -132,7 +132,7 @@ function refreshCanvas(){
         fontFamily=fontFamilyInput.value,
         lineHeight=Math.ceil(fontSize*3/2),
         font=fontSize+'px '+fontFamily;
-    var lines=linefold(text,width,ctx.font);
+    var lines=linefold(text,width,font);
     canvas.width=width;
     canvas.height=lineHeight*lines.length;
     ctx.font=font;
