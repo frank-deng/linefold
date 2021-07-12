@@ -16,11 +16,11 @@ Loading
 
 WebPack
 
-	import Linefold from 'linefold';
+	import linefold from 'linefold';
 
 Node.js
 
-	const Linefold = require('linefold');
+	const linefold = require('linefold');
 
 Script Tag
 
