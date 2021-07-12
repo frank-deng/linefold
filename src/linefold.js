@@ -99,7 +99,7 @@ export function group(str0, matcherList=[]){
         let charProc=matchedStr(str,[
             ...matcherList,
             /^[^\S\r\n]+/,
-            /^[A-Za-z0-9\u0430-\u04ff]+[^\S\r\n]*/i
+            /^[A-Za-z0-9\u00a1-\u04ff]+[^\S\r\n]*/i
         ]);
         str=str.slice(charProc.length);
 

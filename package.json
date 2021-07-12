@@ -1,12 +1,13 @@
 {
   "name": "linefold",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Convert given text into folded lines with maximum width and given font / given text length measuring function before rendering, so as to render paragraphs onto platforms without line-folding support, e.g. HTML5 Canvas.",
   "main": "dist/linefold.js",
   "keywords":[
     "line",
     "folding",
-    "fold"
+    "fold",
+    "newline"
   ],
   "repository": {
     "type": "git",
