@@ -52,7 +52,7 @@ Default text length measuring function based on HTML Canvas, with text length in
 	]
 	*/
 
-Fold text under terminal environment with maximum width of 36 rows (each Chinese characters and punctions takes space of 2 characters):
+Fold text under terminal environment with maximum width of 36 rows:
 
 	var text='Convert given text into folded lines with given font and maximum width before rendering, so as to render paragraphs onto platforms without line-folding support, e.g. HTML5 Canvas.';
 	var lines=linefold(text,36,(text)=>{
@@ -73,6 +73,8 @@ Fold text under terminal environment with maximum width of 36 rows (each Chinese
 		"Canvas."
 	]
 	*/
+
+Fold text with Chinese characters under terminal environment (each Chinese characters and punctions takes space of 2 characters):
 
 	var text='根据给定的文本、最大宽度、字体等条件，对一段文本进行换行操作。然后渲染到一些不支持自动换行的环境上，比如HTML5 Canvas。';
 	var lines=linefold(text,36,(text)=>{
