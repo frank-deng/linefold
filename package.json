@@ -1,9 +1,9 @@
 {
   "name": "linefold",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Convert given text into folded lines with maximum width and given font / given text length measuring function before rendering, so as to render paragraphs onto platforms without line-folding support, e.g. HTML5 Canvas.",
   "main": "dist/linefold.js",
-  "keywords":[
+  "keywords": [
     "line",
     "folding",
     "fold",
@@ -19,8 +19,12 @@
   },
   "author": "Frank Deng",
   "license": "MIT",
+  "browserslist": [
+    "defaults"
+  ],
   "devDependencies": {
     "@babel/core": "^7.14.6",
+    "@babel/preset-env": "^7.14.7",
     "babel-loader": "^8.2.2",
     "mocha": "^9.0.2",
     "webpack": "^5.43.0",

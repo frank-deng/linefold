@@ -8,7 +8,7 @@
     </head>
     <body>
 		<ribbon><a href='https://github.com/frank-deng/linefold/'>Fork me on GitHub</a></ribbon>
-        <div class='inputForm' oninput='refreshCanvas()'>
+        <div class='inputForm' oninput='refreshCanvas()' onchange='refreshCanvas()'>
             <div class='inputItem'>
                 <span translate="width">Width</span><!--
                 --><input type='number' min='1' name='width' value='320'/>
@@ -76,7 +76,7 @@ var LANG_DATA={
 //获取当前使用的语言优先级
 var lang=[], langFallback='en';
 try{
-    var langRaw=window.navigator.languages;
+    var langRaw=window.navigator.languages || [window.navigator.language];
     //从URL中获取语言，覆盖浏览器的语言设置
     var langMatch=/language=([A-Za-z0-9_]+)/.exec(window.location.search);
     if(langMatch && langMatch[1]){
@@ -165,7 +165,8 @@ function refreshCanvas(){
     ctx.fillStyle='#000000';
     ctx.textBaseline='middle';
     var y=Math.round(lineHeight/2);
-    for(let line of lines){
+    for(var i=0;i<lines.length;i++){
+        var line=lines[i];
         ctx.fillText(line,0,y);
         y+=lineHeight;
     }
