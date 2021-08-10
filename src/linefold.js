@@ -102,9 +102,11 @@ export function group(str0, matcherList=[]){
             /^[A-Za-z0-9\u00a1-\u04ff]+[^\S\r\n]*/i
         ]);
         str=str.slice(charProc.length);
-
-        if('\n'!=charProc && result.length
-            && (HEAD_CHAR[prevCharProc] || TAIL_CHAR[charProc]
+        if(result.length
+            && '\n'!=charProc
+            && '\n'!=prevCharProc
+            && (HEAD_CHAR[prevCharProc]
+                || TAIL_CHAR[charProc]
                 || /^[^\S\r\n]+$/.test(charProc))){
             //将当前字符加入到最后一组中
             result[result.length-1]+=charProc;
@@ -133,6 +135,15 @@ export function split(str,maxWidth,measureFunc){
     }
     if(start<len){
         result.push(str.slice(start,len));
+    }
+    
+    //从尾到头扫描拆分后的分组，如果遇到不全是空白字符的分组，则结束，否则删除该分组
+    for(let i=result.length-1; i>=0; i--){
+        let item=result.pop();
+        if(item.trim().length){
+            result.push(item);
+            break;
+        }
     }
     return result.length ? result : [str];
 }
@@ -169,19 +180,30 @@ export default function(text, maxWidth, textLengthMeasure, extraRules=[]){
     let lines=[],currentLine='';
     for(let group of groups){
         if('\n'==group){
-            lines.push(currentLine.replace(/\s+$/g,""));
+            lines.push(currentLine);
             currentLine='';
             continue;
         }
-        if(measureFunc(currentLine+group.replace(/\s+$/g,"")) <= maxWidth){
+        if(measureFunc(currentLine+group) <= maxWidth){
             currentLine+=group;
-        }else{
-            lines.push(currentLine.replace(/\s+$/g,""));
-            currentLine=group;
+            continue;
         }
+        if(measureFunc(currentLine+group.replace(/\s+$/g,'')) <= maxWidth){
+            lines.push(currentLine+group);
+            currentLine='';
+            continue;
+        }
+        lines.push(currentLine);
+        currentLine=group;
     }
-    if(currentLine.length){
-        lines.push(currentLine.replace(/\s+$/g,""));
+    if(currentLine.trim().length){
+        lines.push(currentLine);
+    }
+
+    //Remove trailing spaces from all the generated lines
+    let times=lines.length;
+    for(let i=0; i<times; i++){
+        lines[i]=lines[i].replace(/\s+$/g,'');
     }
     return lines;
 }

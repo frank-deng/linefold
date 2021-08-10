@@ -102,13 +102,40 @@ describe('Line folding integration test',function(){
             "lazy dog"
         ]);
     });
-    it('One-line text',function(){
+    it('Multi-line text',function(){
         let text='The quick brown fox\njumps over a lazy dog';
         assert.deepStrictEqual(Linefold.default(text,8*16,(str)=>(str.length*8)),[
             "The quick brown",
             "fox",
             "jumps over a",
             "lazy dog"
+        ]);
+    });
+    it('Space at the start of a paragraph',function(){
+        let text='  The quick brown fox\n  jumps over a lazy dog';
+        assert.deepStrictEqual(Linefold.default(text,8*16,(str)=>(str.length*8)),[
+            "  The quick",
+            "brown fox",
+            "  jumps over a",
+            "lazy dog"
+        ]);
+    });
+    it('Overwidth group',function(){
+        let text='The                                                        quick brown fox\n  jumps                                    over a lazy dog';
+        assert.deepStrictEqual(Linefold.default(text,8*16,(str)=>(str.length*8)),[
+            "The",
+            "quick brown fox",
+            "  jumps",
+            "over a lazy dog"
+        ]);
+    });
+    it('Overwidth group 2',function(){
+        let text='The   quick                                 brown fox\n  jumps                                    over a lazy dog';
+        assert.deepStrictEqual(Linefold.default(text,8*16,(str)=>(str.length*8)),[
+            "The   quick",
+            "brown fox",
+            "  jumps",
+            "over a lazy dog"
         ]);
     });
 });
