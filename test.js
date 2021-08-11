@@ -1,6 +1,5 @@
-const assert = require('assert');
-const Linefold=require('./linefold.test');
-const {group,split} = Linefold;
+import assert from 'assert';
+import {group,split,default as linefold} from './src/linefold.js';
 
 describe('Grouping test',function(){
     it('Grouping test',function(){
@@ -90,12 +89,12 @@ describe('Overwidth test',function(){
 describe('Line folding integration test',function(){
     it('One-line text',function(){
         let text='The quick brown fox jumps over a lazy dog';
-        assert.deepStrictEqual(Linefold.default(text,8*16,(str)=>(str.length*8)),[
+        assert.deepStrictEqual(linefold(text,8*16,(str)=>(str.length*8)),[
             "The quick brown",
             "fox jumps over a",
             "lazy dog"
         ]);
-        assert.deepStrictEqual(Linefold.default(text,8*15-4,(str)=>(str.length*8)),[
+        assert.deepStrictEqual(linefold(text,8*15-4,(str)=>(str.length*8)),[
             "The quick",
             "brown fox",
             "jumps over a",
@@ -104,7 +103,7 @@ describe('Line folding integration test',function(){
     });
     it('Multi-line text',function(){
         let text='The quick brown fox\njumps over a lazy dog';
-        assert.deepStrictEqual(Linefold.default(text,8*16,(str)=>(str.length*8)),[
+        assert.deepStrictEqual(linefold(text,8*16,(str)=>(str.length*8)),[
             "The quick brown",
             "fox",
             "jumps over a",
@@ -113,7 +112,7 @@ describe('Line folding integration test',function(){
     });
     it('Space at the start of a paragraph',function(){
         let text='  The quick brown fox\n  jumps over a lazy dog';
-        assert.deepStrictEqual(Linefold.default(text,8*16,(str)=>(str.length*8)),[
+        assert.deepStrictEqual(linefold(text,8*16,(str)=>(str.length*8)),[
             "  The quick",
             "brown fox",
             "  jumps over a",
@@ -122,7 +121,7 @@ describe('Line folding integration test',function(){
     });
     it('Overwidth group',function(){
         let text='The                                                        quick brown fox\n  jumps                                    over a lazy dog';
-        assert.deepStrictEqual(Linefold.default(text,8*16,(str)=>(str.length*8)),[
+        assert.deepStrictEqual(linefold(text,8*16,(str)=>(str.length*8)),[
             "The",
             "quick brown fox",
             "  jumps",
@@ -131,7 +130,7 @@ describe('Line folding integration test',function(){
     });
     it('Overwidth group 2',function(){
         let text='The   quick                                 brown fox\n  jumps                                    over a lazy dog';
-        assert.deepStrictEqual(Linefold.default(text,8*16,(str)=>(str.length*8)),[
+        assert.deepStrictEqual(linefold(text,8*16,(str)=>(str.length*8)),[
             "The   quick",
             "brown fox",
             "  jumps",

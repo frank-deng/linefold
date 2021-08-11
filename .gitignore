@@ -78,5 +78,3 @@ typings/
 
 # DynamoDB Local files
 .dynamodb/
-
-linefold.test.js
