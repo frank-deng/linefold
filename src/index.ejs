@@ -40,5 +40,9 @@
             <canvas class='testCanvas' id='testCanvas'></canvas>
         </div>
     </body>
-	<script><%=compilation.assets['testpage.js'].source()%></script>
+<% if('development'==(env.NODE_ENV||'').trim()){ %>
+    <script src='__index__.js'></script>
+<% }else{ %>
+    <script><%=compilation.assets['__index__.js'].source()%></script>
+<% } %>
 </html>
