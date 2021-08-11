@@ -1,14 +1,31 @@
-var path = require('path');
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   mode: 'production',
-  entry: './src/linefold.js',
-  output: {
-    path: path.resolve(__dirname,'dist'),
-    publicPath: "/dist/",
-    filename: 'linefold.js',
-    library:'linefold',
-    libraryExport:'default',
-    libraryTarget:'umd'
+  entry: {
+    './dist/linefold':{
+      publicPath:'/dist/',
+      import:'./src/linefold.js',
+      library:{
+        name: 'linefold',
+        export: 'default',
+        type: 'umd',
+      }
+    },
+    testpage:{
+      publicPath:'/',
+      import:'./src/index.js'
+    }
+  },
+  output:{
+    path: __dirname,
+    filename:'[name].js'
+  },
+  devServer:{
+    static:__dirname,
+    liveReload:false,
+    open:true,
+    port:8082
   },
   module: {
     rules: [
@@ -22,12 +39,34 @@ module.exports = {
         },
         exclude: /node_modules/
       },
+      {
+        test: /\.less$/,
+        use: [
+          {
+            loader:"raw-loader"
+          },
+          {
+            loader:"postcss-loader",
+            options: {
+              postcssOptions:{
+                plugins: {
+                  'cssnano': {}
+                }
+              }
+            }
+          },
+          {
+            loader:"less-loader"
+          }
+        ]
+      }
     ],
   },
-  devServer:{
-    static:__dirname,
-    liveReload:false,
-    open:true,
-    port:8082
-  }
+  plugins:[
+    new HtmlWebpackPlugin({
+      filename: path.resolve(__dirname,'index.html'),
+      template: 'src/index.ejs',
+      inject:false
+    })
+  ]
 };
