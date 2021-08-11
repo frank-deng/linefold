@@ -4,6 +4,7 @@ module.exports = {
   entry: './src/linefold.js',
   output: {
     path: path.resolve(__dirname,'dist'),
+    publicPath: "/dist/",
     filename: 'linefold.js',
     library:'linefold',
     libraryExport:'default',
@@ -22,5 +23,11 @@ module.exports = {
         exclude: /node_modules/
       },
     ],
+  },
+  devServer:{
+    static:__dirname,
+    liveReload:false,
+    open:true,
+    port:8082
   }
 };

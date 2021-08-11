@@ -1,6 +1,6 @@
 {
   "name": "linefold",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Convert given text into folded lines with maximum width and given font / given text length measuring function before rendering, so as to render paragraphs onto platforms without line-folding support, e.g. HTML5 Canvas.",
   "main": "dist/linefold.js",
   "keywords": [
@@ -14,6 +14,7 @@
     "url": "git+https://github.com/frank-deng/linefold"
   },
   "scripts": {
+    "start": "webpack serve",
     "build": "webpack-cli",
     "test": "mochapack --webpack-config webpack.config-test.js test.js"
   },
@@ -31,6 +32,7 @@
     "mochapack": "^2.1.2",
     "webpack": "^5.43.0",
     "webpack-cli": "^4.7.2",
+    "webpack-dev-server": "^4.0.0-rc.0",
     "webpack-node-externals": "^3.0.0"
   }
 }
