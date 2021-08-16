@@ -24,7 +24,7 @@ Node.js
 
 Script Tag
 
-	<script type='text/javascript' src='path/to/linefold.js'></script>
+	<script type='text/javascript' src='./dist/linefold.js'></script>
 
 Usage
 -----
