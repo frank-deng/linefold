@@ -80,3 +80,5 @@ typings/
 .dynamodb/
 
 __index__.js
+__test__.js
+
